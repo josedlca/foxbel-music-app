@@ -86,13 +86,13 @@ function App() {
 
               <div className="results--cards__container-body">
                 <div className="results--cards__container-body_image">
-                  <img src="/assets/img/adele.jpg"/>
+                  <img src="/assets/img/adele.jpg" alt="card-img"/>
                   <span className="results--cards__container-body_image-dots"><i className="fas fa-ellipsis-v"></i></span>
                   <span className="results--cards__container-body_image-play"><i className="fas fa-play"></i></span>                  
                 </div>
                 <div className="results--cards__container-body_info">
                   <h3>21</h3>
-                  <a href="#">Adele</a>
+                  <h4>Adele</h4>
                 </div>
               </div>
               
@@ -107,7 +107,7 @@ function App() {
 
           <div className="play--desc">
             <div className="play--desc__image">
-              <img src="/assets/img/adele.jpg"/>
+              <img src="/assets/img/adele.jpg" alt="smallThumbnail"/>
             </div>
             <div className="play--desc__info">
               <div >Cancion</div>
@@ -115,27 +115,27 @@ function App() {
             </div>
           </div>
 
-          <div>
-            <div>
+          <div className="play--controls">
+            <div className="play--controls__previous">
               <svg viewBox="0 0 24 24">
                 <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
               </svg>
             </div>
-            <div>
+            <div className="play--controls__current">
               <i className="fas fa-play"></i>
             </div>
-            <div>
+            <div className="play--controls__next">
               <svg viewBox="0 0 24 24">
                 <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
               </svg>
             </div>
           </div>
 
-          <div>
-            <div>
+          <div className="play--volume">
+            <div className="play--volume__range">
               <input type="range"/>
             </div>
-            <div>
+            <div className="play--volume__icon">
               <i className="fas fa-volume-off"></i>
             </div>
           </div>

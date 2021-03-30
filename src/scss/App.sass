@@ -57,17 +57,25 @@ body
                 top: 0
                 left: 0
     &--lists
-        margin-left: 4rem
         & h3
             font-weight: 700
             font-size: 2.2rem
             line-height: 1
+            margin-left: 4rem
             margin-bottom: 0.5rem
         & ul li
             font-weight: 400
             font-size: 1.6rem
             line-height: 1
-            margin-bottom: 0.9rem
+            padding: 0.4rem 0 0.4rem 4rem
+            border-left: 0rem solid transparent
+            cursor: pointer  
+            transition: all ease-out 0.2s
+            &:hover 
+                color: #E86060
+                font-weight: 700  
+                border-left: 0.4rem solid #E86060
+                padding-left: 3.6rem
 /* left side styles end*/
 
 /* results styles */
@@ -253,7 +261,7 @@ body
                         line-height: 1
                         color: #555555
                         margin-bottom: 0.3rem
-                    & a 
+                    & h4 
                         font-size: 1.2rem
                         color: #828282   
     // cards styles 
@@ -289,4 +297,84 @@ body
             & div:nth-child(2)
                 font-size: 1.2rem
                 line-height: 1
+    &--controls
+        display: inline-flex
+        flex-direction: row
+        align-items: center
+        justify-content: center
+        &__previous
+            transform: rotateY(180deg)
+            line-height: 1
+            width: 6rem
+            height: 6rem
+            display: inline-flex
+            justify-content: center
+            align-items: center
+            cursor: pointer
+            border-radius: 10rem
+            transition: all ease-in 0.3s
+            & svg 
+                width: 1.9rem
+                height: 1.9rem
+                & path
+                    fill: #ffffff
+            &:hover 
+                background: #FF7676
+        &__current
+            line-height: 1
+            width: 6rem
+            height: 6rem
+            display: inline-flex
+            justify-content: center
+            align-items: center
+            margin: 0 0.5rem
+            cursor: pointer
+            border-radius: 10rem
+            transition: all ease-in 0.3s
+            & i 
+                font-size: 1.8rem
+            &:hover 
+                background: #FF7676
+        &__next
+            line-height: 1
+            width: 6rem
+            height: 6rem
+            display: inline-flex
+            justify-content: center
+            align-items: center
+            cursor: pointer
+            border-radius: 10rem
+            transition: all ease-in 0.3s
+            & svg 
+                width: 1.9rem
+                height: 1.9rem
+                & path
+                    fill: #ffffff
+            &:hover 
+                background: #FF7676
+    &--volume
+        display: inline-flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        &__range
+            margin-right: 4rem
+            & input
+                -webkit-appearance: none
+                border-radius: 10rem
+                height: 0.6rem
+                width: 10rem
+                background: #ffffff
+                &::-webkit-slider-thumb
+                    -webkit-appearance: none
+                    height: 2rem
+                    width: 2rem
+                    border-radius: 10rem
+                    background: #ffffff
+                    cursor: pointer
+        &__icon
+            margin-right: 3.2rem
+            cursor: pointer
+            & i 
+                font-size: 3.6rem                
 /* play bar styles end */

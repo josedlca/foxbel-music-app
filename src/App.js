@@ -71,6 +71,7 @@ function App() {
                 <div className="results--jumbotron__container-info_btn">
                   <button>Reproducir</button>
                   <button>Seguir</button>
+                  <span><i className="fas fa-ellipsis-h"></i></span>
                 </div>
               </div>
             </div>
@@ -78,27 +79,69 @@ function App() {
           </div>
           {/* video jumbotron */}
 
-          {/* Resultados */}
-          <div>
-            <div>Resultados</div>
-            <div>
+          {/* cards */}
+          <div className="results--cards">
+            <div className="results--cards__title">Resultados</div>
+            <div className="results--cards__container">
 
-              <div>
-                <div>
-                  img
+              <div className="results--cards__container-body">
+                <div className="results--cards__container-body_image">
+                  <img src="/assets/img/adele.jpg"/>
+                  <span className="results--cards__container-body_image-dots"><i className="fas fa-ellipsis-v"></i></span>
+                  <span className="results--cards__container-body_image-play"><i className="fas fa-play"></i></span>                  
                 </div>
-                <div>
-                  <div>name song</div>
-                  <div>name artist</div>
+                <div className="results--cards__container-body_info">
+                  <h3>21</h3>
+                  <a href="#">Adele</a>
                 </div>
               </div>
-
+              
             </div>
           </div>
-          {/* Resultados end*/}
+          {/* cards end*/}
         </div>
         {/* results side end*/}
-        <div></div>
+
+        {/* play bar */}
+        <div className="play">
+
+          <div className="play--desc">
+            <div className="play--desc__image">
+              <img src="/assets/img/adele.jpg"/>
+            </div>
+            <div className="play--desc__info">
+              <div >Cancion</div>
+              <div>Artista - Album</div>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <svg viewBox="0 0 24 24">
+                <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
+              </svg>
+            </div>
+            <div>
+              <i className="fas fa-play"></i>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24">
+                <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <input type="range"/>
+            </div>
+            <div>
+              <i className="fas fa-volume-off"></i>
+            </div>
+          </div>
+
+        </div>
+        {/* play bar */}
       </div>
     </main>
   );

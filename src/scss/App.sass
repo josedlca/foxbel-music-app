@@ -1,0 +1,196 @@
+/* normalize styles */
+*
+    margin: 0
+    padding: 0
+    font-size: 10px
+    font-family: 'Quicksand', sans-serif
+    font-weight: 400
+    list-style: none
+    outline: none
+    text-decoration: none
+    color: #ffffff
+    border: none
+
+body
+    height: 100vh
+    width: 100%
+    display: inline-flex
+    justify-content: center
+    background-color: #a04343
+
+/* normalize styles */
+
+.App
+    width: 100%
+    height: 100%
+
+
+.container
+    width: 130rem
+    height: 100%
+    margin: auto
+    display: inline-flex
+    flex-direction: row
+
+
+/* left side styles */
+.leftSide
+    width: 33rem
+    height: 100%
+    background-color: #662323
+    display: inline-flex
+    flex-direction: column
+    &--image
+        width: 100%
+        display: inline-flex
+        justify-content: center
+        &__container
+            position: relative
+            width: 25rem
+            margin: 4rem 0 3rem 0
+            padding-top: 5.9rem
+            & img
+                position: absolute
+                width: 100%
+                height: 100%
+                top: 0
+                left: 0
+    &--lists
+        margin-left: 4rem
+        & h3
+            font-weight: 700
+            font-size: 2.2rem
+            line-height: 1
+            margin-bottom: 0.5rem
+        & ul li
+            font-weight: 400
+            font-size: 1.6rem
+            line-height: 1
+            margin-bottom: 0.9rem
+/* left side styles end*/
+
+/* results styles */
+.results
+    width: 97rem
+    display: inline-flex
+    flex-direction: column
+    height: 100%
+    background-color: #ffffff
+    &--search
+        display: inline-flex
+        flex-direction: row
+        padding: 0 4rem 0 4rem  
+        margin: 3rem 0 4rem 0
+        justify-content: space-between
+        &__inp
+            display: inline-flex
+            width: 59%
+            position: relative
+            & input
+                font-size: 1.8rem
+                width: 100%
+                border: 0.1rem solid #828282
+                color: #BDBDBD
+                padding: 0.6rem 0 0.6rem 1.5rem
+                border-radius: 10rem
+                &::placeholder
+                    color: #BDBDBD
+            &-icon
+                position: absolute
+                right: 0
+                top: 0
+                margin: 0.8rem 1.5rem 0 0
+                cursor: pointer
+                & i
+                    font-size: 1.8rem
+                    color: #BDBDBD
+        &__user
+            display: inline-flex
+            flex-direction: row
+            align-items: center
+            &-icon
+                margin-right: 1.2rem
+                line-height: 1
+                & i 
+                    font-size: 1.4rem
+                    color: #E86060
+            & h4
+                font-size: 1.6rem
+                color: #4F4F4F
+                line-height: 1
+    &--jumbotron
+        margin: 0 4rem
+        display: inline-flex
+        position: relative
+        &__behind
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            opacity: 0.5
+            background-position: 0 -150px
+            background-size: revert 
+            mix-blend-mode: normal
+            z-index: 1
+        &__container
+            position: relative
+            display: inline-flex
+            flex-direction: row
+            z-index: 2
+            &-thumbnail
+                width: 25rem
+                height: 25rem
+                display: inline-table
+                & img
+                    width: 100%
+                    height: 100%
+            &-info
+                display: inline-flex
+                padding: 4rem 3.2rem 0 3.2rem
+                flex-direction: column
+                & h4
+                    font-size: 2.2rem
+                    font-weight: 700
+                    line-height: 1
+                    margin-bottom: 0.7rem
+                &_desc
+                    display: inline-flex
+                    flex-direction: row
+                    align-items: flex-end
+                    margin-bottom: 2rem
+                    & h5  
+                        font-size: 1.4rem
+                        line-height: 1
+                        margin-right: 1rem
+                    & span
+                        font-size: 1.1rem
+                        color: #662323
+                        line-height: 1
+                &_bio
+                    margin-bottom: 5rem
+                    & p
+                        font-size: 1.2rem
+                        line-height: 2
+                &_btn
+                    & button
+                        font-size: 1.4rem
+                        color: #E86060
+                        border: 1px solid #EB5757
+                        border-radius: 10rem
+                        background: transparent
+                        width: 11.7rem
+                        line-height: 1
+                        align-text: center
+                        padding: 0.7rem 0
+                        transition: all 0.3s
+                        &:nth-child(1)
+                            margin-right: 2rem
+                        &:hover
+                            color: #ffffff
+                            background: #E86060
+/* results styles end */
+
+/* jumbotron styles end */
+
+/* jumbotron styles end */

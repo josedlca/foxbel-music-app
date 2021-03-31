@@ -1,130 +1,134 @@
-import React from 'react'
+import React,{useState} from 'react'
+import LeftSide from './components/LeftSide'
+import Search from './components/Search'
+import Jumbotron from './components/Jumbotron'
+import CardsPart from './components/CardsPart'
 import './scss/App.sass'
 
+const DZPLAYER = window.DZ
+DZPLAYER.init({
+  appId  : '8',
+  channelUrl : 'http://developers.deezer.com/examples/channel.php',
+  player : {
+  	onload: function(response) {
+			console.log('DZ.player is ready', response);
+		}
+  }
+});
+
 function App() {
+  const [playing, setPlaying] = useState(false)
+  const [volume, setMiVolume] = useState(50)
+  const [searchData, setSeacrhData] = useState([])
+  const [smallInfo, setSmallInfo] = useState([])
+
+  const fetchMusic = (value) => {
+    fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${value}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+        'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
+        'Access-Control-Allow-Origin': 'http://localhost:3000'
+        }
+      }
+    )
+    .then((response)=>{
+      return response.json()
+    })
+    .then((recurso) => {
+      setSeacrhData(recurso.data)
+    }) 
+  }
+
+  const playMusic = (idTrack,smallInfo) =>{
+      DZPLAYER.player.playTracks([idTrack]) ;
+      setPlaying(!playing);
+      setSmallInfo(smallInfo)
+      return false;
+  }
+  console.log(smallInfo)
+
   return (
     <main className="App">
       <div className="container">
-        {/* left side */}
-        <div className="leftSide">
-          <div className="leftSide--image">
-            <div className="leftSide--image__container">
-              <img src="/assets/img/foxbel-music@3x.png" alt="brandName"/>
-            </div>
-          </div>          
-      
-          <div className="leftSide--lists">
-            <h3>Mi Libreria</h3>
-            <ul>
-              <li>Recientes</li>
-              <li>Artistas</li>
-              <li>Albums</li>
-              <li>Canciones</li>
-              <li>Estaciones</li>
-            </ul>
-          </div>
-
+        <LeftSide/> 
+        <div className="results">  
+          <Search fetchMusicData={fetchMusic}/>
+          {
+            searchData.length === 0 ?
+            <h2>Realiza una Buzqueda</h2>:
+            <>
+              <Jumbotron 
+                  firstData={
+                      {data: searchData[0],
+                      playMusicPass: playMusic}
+                  } />
+              <CardsPart 
+                  secondData={
+                    {data: searchData,
+                    playMusicPass: playMusic}
+                } 
+              />
+            </>
+          }
         </div>
-        {/* left side end*/}
-
-        {/* results side*/}
-        <div className="results">
-          {/* search side */}            
-          <div className="results--search">
-            <div className="results--search__inp">
-              <input type="text" placeholder="Buscar"/>
-              <div className="results--search__inp-icon">
-                <i className="fas fa-search"></i>
-              </div>
-            </div>
-
-            <div className="results--search__user">
-              <div className="results--search__user-icon">
-                <i className="fas fa-user"></i>
-              </div>
-              <h4>User</h4>
-            </div>
-          </div>
-          {/* search side */}
-
-          {/* video jumbotron */}
-          <div className="results--jumbotron">
-
-            <div className="results--jumbotron__behind" 
-              style={{background: "linear-gradient(rgba(167, 0, 0, 0.7), rgba(167, 0, 0, 0.7)),url(assets/img/adele-fit.jpg)"}}>
-            </div>
-
-            <div className="results--jumbotron__container">
-              <div className="results--jumbotron__container-thumbnail">
-                <img src="/assets/img/adele.jpg" alt="artist"/>
-              </div>
-
-              <div className="results--jumbotron__container-info">
-                <h4>Adele 21</h4>
-                <div className="results--jumbotron__container-info_desc">
-                  <h5>Lo mejor de adele</h5>
-                  <span>321,123 seguidores</span>
-                </div>
-                <div className="results--jumbotron__container-info_bio">
-                  <p>Adele Laurie Blue Adkins (Tottenham, Londres, Inglaterra, 5 de mayo de 1988), conocida simplemente como Adele, es una cantante, compositora y multinstrumentista británica.8​ </p>
-                </div>
-                <div className="results--jumbotron__container-info_btn">
-                  <button>Reproducir</button>
-                  <button>Seguir</button>
-                  <span><i className="fas fa-ellipsis-h"></i></span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          {/* video jumbotron */}
-
-          {/* cards */}
-          <div className="results--cards">
-            <div className="results--cards__title">Resultados</div>
-            <div className="results--cards__container">
-
-              <div className="results--cards__container-body">
-                <div className="results--cards__container-body_image">
-                  <img src="/assets/img/adele.jpg" alt="card-img"/>
-                  <span className="results--cards__container-body_image-dots"><i className="fas fa-ellipsis-v"></i></span>
-                  <span className="results--cards__container-body_image-play"><i className="fas fa-play"></i></span>                  
-                </div>
-                <div className="results--cards__container-body_info">
-                  <h3>21</h3>
-                  <h4>Adele</h4>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-          {/* cards end*/}
-        </div>
-        {/* results side end*/}
-
         {/* play bar */}
         <div className="play">
-
-          <div className="play--desc">
-            <div className="play--desc__image">
-              <img src="/assets/img/adele.jpg" alt="smallThumbnail"/>
+          {
+            smallInfo.length === 0?
+            <div className="play--desc">
+              <div className="play--desc__image">
+                <img src="https://via.placeholder.com/150" alt="smallThumbnail"/>
+              </div>
+              <div className="play--desc__info">
+                <div >Cancion</div>
+                <div>Artista - Album</div>
+              </div>
+            </div>:
+            <div className="play--desc">
+              <div className="play--desc__image">
+                <img src={smallInfo[2]} alt="smallThumbnail"/>
+              </div>
+              <div className="play--desc__info">
+                <div >{smallInfo[0]}</div>
+                <div>{smallInfo[1]}</div>
+              </div>
             </div>
-            <div className="play--desc__info">
-              <div >Cancion</div>
-              <div>Artista - Album</div>
-            </div>
-          </div>
-
+          }
+          
           <div className="play--controls">
-            <div className="play--controls__previous">
+            <div 
+              className="play--controls__previous"
+              onClick={()=>{DZPLAYER.player.prev(); return false;}}
+              value= "prev"
+            >
               <svg viewBox="0 0 24 24">
                 <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
               </svg>
             </div>
-            <div className="play--controls__current">
-              <i className="fas fa-play"></i>
-            </div>
-            <div className="play--controls__next">
+            {playing === true?
+              <div 
+                className="play--controls__current"
+                onClick={()=> {DZPLAYER.player.pause();setPlaying(!playing); return false;}} 
+                value="pause"
+              >
+                <i className="fas fa-pause"></i>
+              </div>:
+              <div 
+                className="play--controls__current"
+                onClick={()=> {DZPLAYER.player.play();setPlaying(!playing); return false;}} 
+                value="play"
+              >
+                <i className="fas fa-play"></i>
+              </div>
+            }
+            <div 
+              className="play--controls__next"
+              onClick={()=>{DZPLAYER.player.next(); return false;}}
+              value= "next"
+            >
               <svg viewBox="0 0 24 24">
                 <path d="M19 12l-18 12v-24l18 12zm4-11h-4v22h4v-22z"/>
               </svg>
@@ -133,11 +137,30 @@ function App() {
 
           <div className="play--volume">
             <div className="play--volume__range">
-              <input type="range"/>
+              <input 
+                type="range"
+                id="typeinp"  
+                min="0" max="100" 
+                value= {volume} 
+                onChange={(e)=>{DZPLAYER.player.setVolume(volume);setMiVolume(e.target.value) ;return false;}}
+                step="1"
+              />
             </div>
-            <div className="play--volume__icon">
+            {
+              volume>0 ?
+              <div 
+                className="play--volume__icon"
+                onClick={() => {DZPLAYER.player.setVolume(0);setMiVolume(0); return false;}}
+              >
+                <i className="fas fa-volume-up"></i>
+              </div>:
+              <div 
+                className="play--volume__icon"
+                onClick={() => {DZPLAYER.player.setVolume(50);setMiVolume(50); return false;}}
+              >
               <i className="fas fa-volume-off"></i>
             </div>
+            }
           </div>
 
         </div>
